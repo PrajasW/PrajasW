@@ -1,5 +1,5 @@
 # 💫 About Me:
-I'm currently exploring web 2.0<br>I'm Currently learning Django<br>Love to participate in hackathons<br>Love to watch anime
+💻 I'm currently exploring web 2.0<br>🐝 I'm Currently learning Django<br>🌟 Love to participate in hackathons<br>🤓 Love to watch anime
 
 
 ## 🌐 Socials:
