@@ -1,5 +1,5 @@
 # 💫 About Me:
-🏫 Sophomore At IIIT<br>🤖 Exploring ML<br>🌟 Love to participate in hackathons<br>🤓 Love to watch anime
+🏫 Junior At IIIT<br>🤖 Exploring ML<br>🌟 Love to participate in hackathons<br>🤓 Love to watch anime
 
 
 ## 🌐 Socials:
