@@ -2115,8 +2115,7 @@
         {
           degree: "B.Tech & M.Sc. in Computer Science",
           institution: "International Institute of Information Technology, Hyderabad (IIIT-H)",
-          duration: "2021 - 2026",
-          description: "Dual Degree Student. Undergraduate Researcher in the Machine Learning Lab."
+          duration: "2024 - 2028"
         }
       ],
     };
@@ -2182,7 +2181,7 @@
       <div>
         <p class="role">${escapeHTML(ed.degree)}</p>
         <p class="org">${escapeHTML(ed.institution)}</p>
-        <p class="summary">${escapeHTML(ed.description)}</p>
+        ${ed.description ? `<p class="summary">${escapeHTML(ed.description)}</p>` : ''}
       </div>
     </div>
   `).join('');
