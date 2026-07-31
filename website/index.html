@@ -927,20 +927,9 @@
       gap: 32px;
     }
 
-    .project-entry {
-      grid-template-columns: 90px 1fr 28px !important;
-      gap: 20px !important;
-      align-items: start;
-      padding: 28px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .project-entry:first-child {
-      padding-top: 0;
-    }
-    .project-entry:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
+
+
+
     .github-link {
       color: var(--muted);
       opacity: 0.6;
@@ -963,13 +952,13 @@
     }
 
     .tech-badge {
-      padding: 3px 10px;
-      background: var(--panel);
-      border: 1px solid var(--rule);
-      border-radius: 12px;
-      font-size: 11.5px;
-      color: var(--muted);
-      font-family: var(--sans);
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--faint);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 2px 6px;
+      border-radius: 4px;
     }
 
     .experience-entry {
@@ -2356,20 +2345,17 @@
       const wrap = document.createElement('div');
       const list = document.createElement('div');
       list.className = 'experience-list';
-      list.style.gap = '0'; // override default gap since we have padding on rows now
       list.innerHTML = DATA.projects.map((p) => `
-    <div class="experience-entry project-entry">
-      <div class="when" style="font-family: monospace; font-size: 0.8rem; letter-spacing: 0.12em; opacity: 0.55; padding-top: 6px;">${escapeHTML(p.shortName)}</div>
-      <div class="project-content">
-        <p class="role" style="font-size: 1.35rem; font-weight: 700; margin:0;">${escapeHTML(p.title)}</p>
-        ${p.tech ? `<div class="tech-stack" style="margin: 8px 0 10px;">${p.tech.split(',').map(t => `<span class="tech-badge" style="padding: 3px 9px; font-size: 12px; border-radius: 999px;">${escapeHTML(t.trim())}</span>`).join('')}</div>` : ''}
-        <div style="max-width: 75ch;">
-          ${!detailed ? `<p class="summary" style="margin: 0;">${escapeHTML(p.summary)}</p>` : ''}
-          ${detailed && p.bullets ? `<ul class="bullets" style="margin: 0;">${p.bullets.map(b => `<li>${escapeHTML(b)}</li>`).join('')}</ul>` : ''}
+    <div class="experience-entry">
+      <div class="when">${escapeHTML(p.shortName)}</div>
+      <div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <p class="role">${escapeHTML(p.title)}</p>
+          ${p.link ? `<a href="${p.link}" class="github-link" target="_blank" rel="noopener" style="display:flex;align-items:center;margin-top:2px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>` : ''}
         </div>
-      </div>
-      <div class="project-links" style="display: flex; align-items: flex-start; padding-top: 6px;">
-        ${p.link ? `<a href="${p.link}" class="github-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>` : ''}
+        ${p.tech ? `<div class="tech-stack" style="margin:4px 0 6px;">${p.tech.split(',').map(t => `<span class="tech-badge">${escapeHTML(t.trim())}</span>`).join('')}</div>` : ''}
+        ${!detailed ? `<p class="summary">${escapeHTML(p.summary)}</p>` : ''}
+        ${detailed && p.bullets ? `<ul class="bullets">${p.bullets.map(b => `<li>${escapeHTML(b)}</li>`).join('')}</ul>` : ''}
       </div>
     </div>
   `).join('');
