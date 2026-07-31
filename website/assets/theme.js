@@ -1,5 +1,5 @@
 (function () {
-  const STORAGE_KEY = "srija-theme";
+  const STORAGE_KEY = "prajas-theme";
   const root = document.documentElement;
 
   function storedTheme() {
@@ -53,7 +53,7 @@
 
   applyTheme(currentTheme());
 
-  window.SrijaTheme = {
+  window.PrajasTheme = {
     apply: applyTheme,
     init: initThemeControls,
     toggle: toggleTheme
