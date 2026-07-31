@@ -2098,21 +2098,60 @@
       ],
       projects: [
         {
-          name: "FIRE",
-          desc: "Engineered a full-text search engine over a 1M+ document corpus (Wikipedia/Webz.io), achieving 4,943 QPS."
+          shortName: "FIRE",
+          title: "Fast Information Retrieval Engine",
+          link: "https://github.com/PrajasW/fire",
+          tech: "Python, PostgreSQL, Redis, FastAPI, TF-IDF/BM25",
+          summary: "Engineered a full-text search engine over a 1M+ document corpus (Wikipedia/Webz.io), achieving 4,943 QPS.",
+          bullets: [
+            "Engineered a full-text search engine over a 1M+ document corpus spanning Wikipedia and Webz.io data, building custom positional inverted indexes with TAAT/DAAT query execution for Boolean, phrase, and TF-IDF ranking.",
+            "Accelerated query throughput by 99.1% (2,483 to 4,943 QPS) and cut p95 latency over 50% (to 0.31ms) by devising positional skip pointers and posting-list compression, benchmarked across Redis, PostgreSQL, and Elasticsearch."
+          ]
         },
         {
-          name: "ESPER",
-          desc: "Automated AI claims pipeline fine-tuning YOLOv8 across 17 vehicle-damage classes and fusing CLIP embeddings to flag fraudulent photos."
+          shortName: "ESPER",
+          title: "Insurance Claim Analysis System",
+          link: "https://github.com/PrajasW/ESPER-Insurance-Claim-Analysis-System",
+          tech: "Python, Flask, YOLOv8, MySQL, CLIP",
+          summary: "Automated AI claims pipeline fine-tuning YOLOv8 across 17 vehicle-damage classes and fusing CLIP embeddings to flag fraudulent photos.",
+          bullets: [
+            "Developed an automated AI claims pipeline, fine-tuning YOLOv8 across 17 vehicle-damage classes and fusing CLIP embeddings with Error Level Analysis (ELA) to flag fraudulent photos at 74% detection accuracy.",
+            "Deployed a scalable Flask and MySQL web application to process concurrent high-resolution image uploads, dynamically generating standardized PDF claim reports in under 3 seconds."
+          ]
         },
         {
-          name: "Distributed Network File System",
-          desc: "Multithreaded distributed file system via TCP/IP utilizing POSIX threads and automatic replication."
+          shortName: "NFS",
+          title: "Distributed Network File System",
+          link: "https://github.com/PrajasW/nfs",
+          tech: "C, POSIX Threads, TCP/UDP Sockets, Distributed Systems",
+          summary: "Multithreaded distributed file system via TCP/IP utilizing POSIX threads and automatic replication.",
+          bullets: [
+            "Built a multithreaded distributed file system via TCP/IP (Naming and Storage Servers), utilizing POSIX threads and reader-writer locks to manage concurrent client access and enable reliable audio file streaming.",
+            "Cut file-lookup latency via Trie-based routing and an LRU cache, and ensured high availability through 3x automatic replication with sub-second server failover."
+          ]
         },
         {
-          name: "Phantom Bot",
-          desc: "Cross-auction profiling bot for the BOLT Auction Challenge."
+          shortName: "My-Shell",
+          title: "Unix-style Shell in C",
+          link: "https://github.com/PrajasW/my-shell",
+          tech: "C, POSIX, Linux",
+          summary: "Built a Unix-style shell in C supporting process management, multi-stage piping, and background execution.",
+          bullets: [
+            "Built a Unix-style shell in C using POSIX system calls (fork, exec, wait) to implement process management, recursive-descent command parsing, and interactive job control.",
+            "Integrated core functionalities including multi-stage piping (|), I/O redirection (>, <), and background execution (&), alongside an extensible architecture supporting 10+ custom commands."
+          ]
         },
+        {
+          shortName: "GeoVision",
+          title: "Geo-Localization from Campus Imagery",
+          link: "https://github.com/PrajasW/GeoVision",
+          tech: "PyTorch, ConvNeXt, ResNet, EfficientNet, Python",
+          summary: "Captured a custom dataset and trained PyTorch models to predict GPS coordinates and camera angles from campus imagery with >90% accuracy.",
+          bullets: [
+            "Captured and curated a custom geo-localization dataset by photographing 15 campus regions across three distinct time periods, then trained models to predict GPS coordinates and camera angle from images.",
+            "Evaluated ResNet, EfficientNet, and ConvNeXt architectures on multi-task regression and classification, applying robust preprocessing to exceed 90% accuracy across all classification tasks."
+          ]
+        }
       ],
       hackathons: [
         {
@@ -2267,15 +2306,23 @@
       return wrap;
     }
 
-    function renderProjects() {
+    function renderProjects(detailed) {
       const wrap = document.createElement('div');
       const list = document.createElement('div');
       list.className = 'experience-list';
       list.innerHTML = DATA.projects.map((p) => `
     <div class="experience-entry">
-      <div class="when" style="font-weight:600;color:var(--fn)">${escapeHTML(p.name)}</div>
+      <div class="when" style="font-family: var(--mono); font-size: 13px; color: var(--muted); padding-top: 1px;">${escapeHTML(p.shortName)}</div>
       <div>
-        <p class="summary">${escapeHTML(p.desc)}</p>
+        <div style="display:flex; justify-content:space-between; gap:16px;">
+          <p class="role">${escapeHTML(p.title)}</p>
+          <div style="display:flex; gap:12px; margin-top:2px;">
+            ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener" style="color:var(--muted);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>` : ''}
+          </div>
+        </div>
+        ${p.tech ? `<p class="advisor" style="margin-top:2px;">Tech Stack: ${escapeHTML(p.tech)}</p>` : ''}
+        ${!detailed ? `<p class="summary" style="margin-top:4px;">${escapeHTML(p.summary)}</p>` : ''}
+        ${detailed && p.bullets ? `<ul style="margin: 6px 0 0; padding-left: 18px;">${p.bullets.map(b => `<li style="font-size: 13.5px; line-height: 1.6; margin-bottom: 6px;">${escapeHTML(b)}</li>`).join('')}</ul>` : ''}
       </div>
     </div>
   `).join('');
@@ -2497,10 +2544,12 @@
       if (/prajas\.about\(\s*\)/.test(src)) { outEl.appendChild(renderAbout()); return; }
       if (/prajas\.education\(\s*\)/.test(src)) { outEl.appendChild(renderEducation()); return; }
       if (/prajas\.hobbies\(\s*\)/.test(src)) { outEl.appendChild(renderHobbies()); return; }
-      if (/prajas\.projects\(\s*\)/.test(src)) { outEl.appendChild(renderProjects()); return; }
       if (/prajas\.hackathons\(\s*\)/.test(src)) { outEl.appendChild(renderHackathons()); return; }
       if (/prajas\.contact\(\s*\)/.test(src)) { outEl.appendChild(renderContact()); return; }
       if (/prajas\.ask\(\s*question\s*\)/.test(src)) { outEl.appendChild(renderAskButtons()); return; }
+
+      const proj = src.match(/prajas\.projects\s*\(\s*(?:detailed\s*=\s*(True|False))?\s*\)/);
+      if (proj) { outEl.appendChild(renderProjects(proj[1] === 'True')); return; }
 
       const pm = src.match(/prajas\.publications\s*\(\s*(?:detailed\s*=\s*(True|False))?\s*\)/);
       if (pm) { outEl.appendChild(renderPapers(pm[1] === 'True')); return; }
@@ -2662,7 +2711,7 @@
         { ...makeCell({ type: 'md', content: `## Publications` }), editable: false },
         makeCell({ type: 'code', content: 'prajas.publications(detailed=False)' }),
         { ...makeCell({ type: 'md', content: `## Projects` }), editable: false },
-        makeCell({ type: 'code', content: 'prajas.projects()' }),
+        makeCell({ type: 'code', content: 'prajas.projects(detailed=False)' }),
         { ...makeCell({ type: 'md', content: `## Hackathons` }), editable: false },
         makeCell({ type: 'code', content: 'prajas.hackathons()' }),
         { ...makeCell({ type: 'md', content: `## Hobbies & Free Time` }), editable: false },
