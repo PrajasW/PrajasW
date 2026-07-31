@@ -11,10 +11,3 @@
 ![](https://github-readme-streak-stats.herokuapp.com/?user=prajasw&theme=dark&hide_border=false)<br/>
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=prajasw&theme=dark&hide_border=false&include_all_commits=true&count_private=false&layout=compact)
 
-### 😵 MayMay
-<img src='https://randommeme-five.vercel.app/' style="height: 400px;"/>
-
----
-[![](https://visitcount.itsvg.in/api?id=prajasw&icon=0&color=0)](https://visitcount.itsvg.in)
-
-<!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
