@@ -12,7 +12,7 @@
   }
 
   function currentTheme() {
-    return storedTheme() || "light";
+    return storedTheme() || "dark";
   }
 
   function setButtonState(theme) {
