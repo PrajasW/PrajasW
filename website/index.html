@@ -2054,16 +2054,37 @@
       ],
       experienceConcise: [
         {
-          when: "May 2025-Present",
+          when: "May 2025 - Present",
           role: "Undergraduate Researcher",
           org: "Machine Learning Lab, IIIT Hyderabad",
-          summary: "Researching adversarial robustness of 3D novel view synthesis methods."
+          summary: "Researching adversarial robustness of 3D novel view synthesis methods. (Advisor: Dr. Charu Sharma)"
         },
         {
-          when: "Jan 2025-Apr 2025",
+          when: "Jan 2025 - Apr 2025",
           role: "Software Engineering Intern",
           org: "Eklavya Foundation",
           summary: "Led a small development team to architect and deploy a custom LMS supporting 2,000+ active students and faculty."
+        }
+      ],
+      experienceDetailed: [
+        {
+          when: "May 2025 - Present",
+          role: "Undergraduate Researcher",
+          org: "Machine Learning Lab, IIIT Hyderabad",
+          summary: "Advisor: Dr. Charu Sharma",
+          bullets: [
+            "Investigated adversarial robustness in 3D novel view synthesis, identifying specific vulnerabilities within 3D and 4D Gaussian Splatting architectures.",
+            "Designed and executed performance-degradation attacks on 3D reconstruction pipelines, establishing baseline vulnerability metrics for secure Gaussian Splatting evaluation."
+          ]
+        },
+        {
+          when: "Jan 2025 - Apr 2025",
+          role: "Software Engineering Intern",
+          org: "Eklavya Foundation",
+          bullets: [
+            "Led a development team to engineer and deploy a custom Learning Management System (LMS) across multiple NGO institutions, successfully scaling the platform for over 2,000 active students and faculty.",
+            "Designed a secure backend infrastructure utilizing MongoDB and 15+ RESTful API endpoints, implementing Google OAuth and 3-tier Role-Based Access Control (RBAC) to manage concurrent dashboard access."
+          ]
         }
       ],
       projects: [
@@ -2212,7 +2233,7 @@
 
     function renderExperience(detailed) {
       const wrap = document.createElement('div');
-      const items = DATA.experienceConcise;
+      const items = detailed ? DATA.experienceDetailed : DATA.experienceConcise;
       const list = document.createElement('div');
       list.className = 'experience-list';
       list.innerHTML = items.map((e) => `
@@ -2221,11 +2242,22 @@
       <div>
         <p class="role">${escapeHTML(e.role)}</p>
         <p class="org">${escapeHTML(e.org)}</p>
-        <p class="summary">${escapeHTML(e.summary || '')}</p>
+        ${e.summary ? `<p class="summary" style="margin-bottom: ${e.bullets ? '8px' : '0'};">${escapeHTML(e.summary)}</p>` : ''}
+        ${e.bullets ? `<ul style="margin: 0; padding-left: 20px;">${e.bullets.map(b => `<li style="font-size: 13.5px; line-height: 1.6; margin-bottom: 6px;">${escapeHTML(b)}</li>`).join('')}</ul>` : ''}
       </div>
     </div>
   `).join('');
       wrap.appendChild(list);
+      
+      if (!detailed) {
+        const hint = document.createElement('div');
+        hint.style.marginTop = '16px';
+        hint.style.fontFamily = 'var(--mono)';
+        hint.style.fontSize = '12px';
+        hint.style.color = 'var(--com)';
+        hint.textContent = '# run prajas.experience(detailed=True) for full bullet points';
+        wrap.appendChild(hint);
+      }
       return wrap;
     }
 
