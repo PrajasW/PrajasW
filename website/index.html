@@ -2198,16 +2198,19 @@
 
     function renderEducation() {
       const wrap = document.createElement('div');
-      wrap.className = 'out-text';
-      DATA.education.forEach(ed => {
-        const row = document.createElement('div');
-        row.style.marginBottom = '12px';
-        row.innerHTML = `<strong>${escapeHTML(ed.degree)}</strong><br>
-        <span style="color:var(--muted)">${escapeHTML(ed.institution)}</span><br>
-        <span style="color:var(--muted)">${escapeHTML(ed.duration)}</span><br>
-        <div style="margin-top: 4px;">${escapeHTML(ed.description)}</div>`;
-        wrap.appendChild(row);
-      });
+      const list = document.createElement('div');
+      list.className = 'experience-list';
+      list.innerHTML = DATA.education.map(ed => `
+    <div class="experience-entry">
+      <div class="when">${escapeHTML(ed.duration)}</div>
+      <div>
+        <p class="role">${escapeHTML(ed.degree)}</p>
+        <p class="org">${escapeHTML(ed.institution)}</p>
+        <p class="summary">${escapeHTML(ed.description)}</p>
+      </div>
+    </div>
+  `).join('');
+      wrap.appendChild(list);
       return wrap;
     }
 
