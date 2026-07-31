@@ -801,22 +801,15 @@
     }
 
     .interest-dict {
-      background: #fff;
-      border: 1px solid var(--rule);
-      border-radius: 6px;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
     .interest-dict .row {
       display: grid;
       grid-template-columns: 220px 1fr;
-      gap: 14px;
-      padding: 14px 16px;
-      border-top: 1px solid var(--rule);
-    }
-
-    .interest-dict .row:first-child {
-      border-top: none;
+      gap: 16px;
     }
 
     .interest-dict .key {
@@ -863,22 +856,15 @@
     }
 
     .paper-list {
-      background: #fff;
-      border: 1px solid var(--rule);
-      border-radius: 6px;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
     .paper-item {
       display: grid;
       grid-template-columns: 64px 1fr;
-      gap: 14px;
-      padding: 14px 16px;
-      border-top: 1px solid var(--rule);
-    }
-
-    .paper-item:first-child {
-      border-top: none;
+      gap: 16px;
     }
 
     .paper-item .year {
@@ -936,22 +922,15 @@
     }
 
     .experience-list {
-      background: #fff;
-      border: 1px solid var(--rule);
-      border-radius: 6px;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
     .experience-entry {
       display: grid;
       grid-template-columns: 120px 1fr;
       gap: 16px;
-      padding: 15px 16px;
-      border-top: 1px solid var(--rule);
-    }
-
-    .experience-entry:first-child {
-      border-top: none;
     }
 
     .experience-entry .when {
@@ -1560,9 +1539,6 @@
 
     html[data-theme="dark"] .toolbar .celltype,
     html[data-theme="dark"] table.df,
-    html[data-theme="dark"] .interest-dict,
-    html[data-theme="dark"] .paper-list,
-    html[data-theme="dark"] .experience-list,
     html[data-theme="dark"] .garden-preview-card,
     html[data-theme="dark"] .plot-figure,
     html[data-theme="dark"] .agent-box,
