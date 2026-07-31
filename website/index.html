@@ -924,49 +924,55 @@
     .experience-list {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 32px;
     }
 
     .experience-entry {
       display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 16px;
+      grid-template-columns: 145px 1fr;
+      gap: 12px;
     }
 
     .experience-entry .when {
       font-family: var(--mono);
-      font-size: 11.5px;
+      font-size: 13px;
       color: var(--muted);
       padding-top: 2px;
     }
 
     .experience-entry .role {
-      margin: 0 0 4px;
+      margin: 0 0 2px;
       font-family: var(--sans);
-      font-size: 15px;
+      font-size: 15.5px;
       font-weight: 600;
       line-height: 1.4;
       color: var(--ink);
     }
 
     .experience-entry .org {
-      margin: 0 0 6px;
+      margin: 0 0 2px;
       font-family: var(--sans);
-      font-size: 13px;
-      line-height: 1.6;
+      font-size: 14px;
       color: var(--muted);
     }
 
+    .experience-entry .advisor {
+      margin: 0 0 6px;
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--faint);
+    }
+
     .experience-entry .summary {
-      margin: 0;
+      margin: 4px 0 0;
       font-family: var(--sans);
       font-size: 13.5px;
-      line-height: 1.65;
+      line-height: 1.6;
       color: var(--ink);
     }
 
     .experience-entry .bullets {
-      margin: 8px 0 0;
+      margin: 6px 0 0;
       padding-left: 18px;
       color: var(--ink);
     }
@@ -2057,7 +2063,7 @@
           when: "May 2025 - Present",
           role: "Undergraduate Researcher",
           org: "Machine Learning Lab, IIIT Hyderabad",
-          summary: "Researching adversarial robustness of 3D novel view synthesis methods. (Advisor: Dr. Charu Sharma)"
+          summary: "Researching adversarial robustness of 3D novel view synthesis methods."
         },
         {
           when: "Jan 2025 - Apr 2025",
@@ -2242,22 +2248,13 @@
       <div>
         <p class="role">${escapeHTML(e.role)}</p>
         <p class="org">${escapeHTML(e.org)}</p>
+        ${e.advisor ? `<p class="advisor">${escapeHTML(e.advisor)}</p>` : ''}
         ${e.summary ? `<p class="summary" style="margin-bottom: ${e.bullets ? '8px' : '0'};">${escapeHTML(e.summary)}</p>` : ''}
         ${e.bullets ? `<ul style="margin: 0; padding-left: 20px;">${e.bullets.map(b => `<li style="font-size: 13.5px; line-height: 1.6; margin-bottom: 6px;">${escapeHTML(b)}</li>`).join('')}</ul>` : ''}
       </div>
     </div>
   `).join('');
       wrap.appendChild(list);
-      
-      if (!detailed) {
-        const hint = document.createElement('div');
-        hint.style.marginTop = '16px';
-        hint.style.fontFamily = 'var(--mono)';
-        hint.style.fontSize = '12px';
-        hint.style.color = 'var(--com)';
-        hint.textContent = '# run prajas.experience(detailed=True) for full bullet points';
-        wrap.appendChild(hint);
-      }
       return wrap;
     }
 
