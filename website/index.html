@@ -1976,6 +1976,8 @@
     <div class="btn" title="Copy">❏</div>
     <div class="btn" title="Paste">▤</div>
     <div class="sep"></div>
+    <div class="btn" title="Move Up" id="tb-up">↑</div>
+    <div class="btn" title="Move Down" id="tb-down">↓</div>
     <div class="btn" title="Run selected (Shift+Enter)" id="tb-run">▶</div>
     <div class="btn" title="Stop">■</div>
     <div class="btn" title="Restart kernel" id="tb-restart">↻</div>
@@ -2939,6 +2941,28 @@
       scheduleNotebookSave();
     }
 
+    function moveCellUp(idx) {
+      if (idx <= 0 || idx >= CELLS.length) return;
+      closeAddMenu();
+      const temp = CELLS[idx];
+      CELLS[idx] = CELLS[idx - 1];
+      CELLS[idx - 1] = temp;
+      renderAll();
+      selectCell(idx - 1);
+      scheduleNotebookSave();
+    }
+
+    function moveCellDown(idx) {
+      if (idx < 0 || idx >= CELLS.length - 1) return;
+      closeAddMenu();
+      const temp = CELLS[idx];
+      CELLS[idx] = CELLS[idx + 1];
+      CELLS[idx + 1] = temp;
+      renderAll();
+      selectCell(idx + 1);
+      scheduleNotebookSave();
+    }
+
     let ADD_AFTER_INDEX = null;
 
     function openAddMenu(anchorEl, afterIdx) {
@@ -3012,6 +3036,8 @@
       openAddMenu(e.currentTarget, SELECTED);
     };
     document.getElementById('tb-delete').onclick = () => deleteCell(SELECTED);
+    document.getElementById('tb-up').onclick = () => moveCellUp(SELECTED);
+    document.getElementById('tb-down').onclick = () => moveCellDown(SELECTED);
     document.getElementById('help-x').onclick = () => document.getElementById('help').classList.remove('show');
     setTimeout(() => document.getElementById('help').classList.remove('show'), 5000);
 
