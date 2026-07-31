@@ -2309,7 +2309,7 @@
   prajas.about()                     &nbsp;→ bio
   prajas.interests()                 &nbsp;→ research themes
   prajas.hobbies()                   &nbsp;→ personal hobbies
-  prajas.publications() &nbsp;→ selected publications
+  prajas.publications()              &nbsp;→ selected publications
   prajas.experience(detailed=False)  &nbsp;→ concise experience
   prajas.projects()                  &nbsp;→ technical and academic projects
   prajas.hackathons()                &nbsp;→ hackathon achievements
@@ -2436,7 +2436,7 @@
 
     function execCode(code, outEl, isCurrent) {
       outEl.replaceChildren();
-      const src = code.trim();
+      const src = code.replace(/#.*$/gm, '').trim();
 
       if (/import\s+prajas/.test(src)) {
         KERNEL_IMPORTED = true;
@@ -2615,7 +2615,7 @@
       <p>Hello and welcome! Feel free to explore around or use <code>prajas.help()</code> to see all the fun things you can do.</p>
     `}), editable: false
         },
-        makeCell({ type: 'code', content: '# Run `prajas.help()` in a new cell to see all available commands\nimport prajas\nprajas.about()' }),
+        makeCell({ type: 'code', content: 'import prajas\nprajas.about()\n# use prajas.help() to look at the commands' }),
         { ...makeCell({ type: 'md', content: `## Interests` }), editable: false },
         makeCell({ type: 'code', content: 'prajas.interests()' }),
         { ...makeCell({ type: 'md', content: `## Hobbies & Free Time` }), editable: false },
