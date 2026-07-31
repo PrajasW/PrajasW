@@ -928,9 +928,9 @@
     }
 
     .project-entry {
-      grid-template-columns: 100px 1fr !important;
-      gap: 16px !important;
-      padding-bottom: 24px;
+      grid-template-columns: 85px 1fr !important;
+      gap: 12px !important;
+      padding-bottom: 16px;
       border-bottom: 1px solid var(--rule);
     }
     .project-entry:last-child {
@@ -942,7 +942,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin: 6px 0 8px;
+      margin: 6px 0;
     }
 
     .tech-badge {
@@ -2343,13 +2343,13 @@
     <div class="experience-entry project-entry">
       <div class="when" style="color: var(--faint); font-family: var(--mono); font-size: 13px; padding-top: 1px;">${escapeHTML(p.shortName)}</div>
       <div>
-        <div style="display:flex; align-items:center; gap:8px; margin-bottom: 4px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 2px;">
           <p class="role" style="margin:0;">${escapeHTML(p.title)}</p>
-          ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener" style="color:var(--muted); display:flex; align-items:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>` : ''}
+          ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener" style="color:var(--muted); display:flex; align-items:center; margin-top:2px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>` : ''}
         </div>
         ${p.tech ? `<div class="tech-stack">${p.tech.split(',').map(t => `<span class="tech-badge">${escapeHTML(t.trim())}</span>`).join('')}</div>` : ''}
-        ${!detailed ? `<p class="summary">${escapeHTML(p.summary)}</p>` : ''}
-        ${detailed && p.bullets ? `<ul class="bullets">${p.bullets.map(b => `<li>${escapeHTML(b)}</li>`).join('')}</ul>` : ''}
+        ${!detailed ? `<p class="summary" style="margin-top: 6px;">${escapeHTML(p.summary)}</p>` : ''}
+        ${detailed && p.bullets ? `<ul class="bullets" style="margin-top: 6px;">${p.bullets.map(b => `<li>${escapeHTML(b)}</li>`).join('')}</ul>` : ''}
       </div>
     </div>
   `).join('');
