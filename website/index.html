@@ -2135,6 +2135,14 @@
         "Tinkering with hardware projects",
         "3D printing"
       ],
+      education: [
+        {
+          degree: "B.Tech & M.Sc. in Computer Science",
+          institution: "International Institute of Information Technology, Hyderabad (IIIT-H)",
+          duration: "2021 - 2026",
+          description: "Dual Degree Student. Undergraduate Researcher in the Machine Learning Lab."
+        }
+      ],
     };
 
     // ==========================================================
@@ -2185,6 +2193,21 @@
       const wrap = document.createElement('div');
       wrap.className = 'out-text';
       wrap.innerHTML = '<ul style="margin: 0; padding-left: 20px;">' + DATA.hobbies.map(h => '<li style="margin-bottom: 4px;">' + escapeHTML(h) + '</li>').join('') + '</ul>';
+      return wrap;
+    }
+
+    function renderEducation() {
+      const wrap = document.createElement('div');
+      wrap.className = 'out-text';
+      DATA.education.forEach(ed => {
+        const row = document.createElement('div');
+        row.style.marginBottom = '12px';
+        row.innerHTML = `<strong>${escapeHTML(ed.degree)}</strong><br>
+        <span style="color:var(--muted)">${escapeHTML(ed.institution)}</span><br>
+        <span style="color:var(--muted)">${escapeHTML(ed.duration)}</span><br>
+        <div style="margin-top: 4px;">${escapeHTML(ed.description)}</div>`;
+        wrap.appendChild(row);
+      });
       return wrap;
     }
 
@@ -2307,12 +2330,12 @@
 
 <span style="color:var(--kw)">Profile + technical work</span>
   prajas.about()                     &nbsp;→ bio
-  prajas.interests()                 &nbsp;→ research themes
-  prajas.hobbies()                   &nbsp;→ personal hobbies
-  prajas.publications()              &nbsp;→ selected publications
+  prajas.education()                 &nbsp;→ academic background
   prajas.experience(detailed=False)  &nbsp;→ concise experience
+  prajas.publications()              &nbsp;→ selected publications
   prajas.projects()                  &nbsp;→ technical and academic projects
   prajas.hackathons()                &nbsp;→ hackathon achievements
+  prajas.hobbies()                   &nbsp;→ personal hobbies
   prajas.contact()                   &nbsp;→ contact card
 
 <span style="color:var(--kw)">Notebook actions</span>
@@ -2325,7 +2348,7 @@
     }
     function renderToolFromCall(toolCall) {
       if (/^prajas\.about\(\s*\)$/.test(toolCall)) return renderAbout();
-      if (/^prajas\.interests\(\s*\)$/.test(toolCall)) return renderInterests();
+      if (/^prajas\.education\(\s*\)$/.test(toolCall)) return renderEducation();
       if (/^prajas\.hobbies\(\s*\)$/.test(toolCall)) return renderHobbies();
       if (/^prajas\.contact\(\s*\)$/.test(toolCall)) return renderContact();
       if (/^prajas\.projects\(\s*\)$/.test(toolCall)) return renderProjects();
@@ -2456,7 +2479,7 @@
 
       if (/prajas\.help\(\s*\)/.test(src)) { outEl.appendChild(renderHelp()); return; }
       if (/prajas\.about\(\s*\)/.test(src)) { outEl.appendChild(renderAbout()); return; }
-      if (/prajas\.interests\(/.test(src)) { outEl.appendChild(renderInterests()); return; }
+      if (/prajas\.education\(\s*\)/.test(src)) { outEl.appendChild(renderEducation()); return; }
       if (/prajas\.hobbies\(\s*\)/.test(src)) { outEl.appendChild(renderHobbies()); return; }
       if (/prajas\.projects\(\s*\)/.test(src)) { outEl.appendChild(renderProjects()); return; }
       if (/prajas\.hackathons\(\s*\)/.test(src)) { outEl.appendChild(renderHackathons()); return; }
@@ -2616,20 +2639,18 @@
     `}), editable: false
         },
         makeCell({ type: 'code', content: 'import prajas\nprajas.about()' }),
-        { ...makeCell({ type: 'md', content: `## Interests` }), editable: false },
-        makeCell({ type: 'code', content: 'prajas.interests()' }),
-        { ...makeCell({ type: 'md', content: `## Hobbies & Free Time` }), editable: false },
-        makeCell({ type: 'code', content: 'prajas.hobbies()' }),
-        { ...makeCell({ type: 'md', content: `## Publications` }), editable: false },
-        makeCell({ type: 'code', content: 'prajas.publications()' }),
+        { ...makeCell({ type: 'md', content: `## Education` }), editable: false },
+        makeCell({ type: 'code', content: 'prajas.education()' }),
         { ...makeCell({ type: 'md', content: `## Experience` }), editable: false },
         makeCell({ type: 'code', content: 'prajas.experience(detailed=False)' }),
+        { ...makeCell({ type: 'md', content: `## Publications` }), editable: false },
+        makeCell({ type: 'code', content: 'prajas.publications()' }),
         { ...makeCell({ type: 'md', content: `## Projects` }), editable: false },
         makeCell({ type: 'code', content: 'prajas.projects()' }),
         { ...makeCell({ type: 'md', content: `## Hackathons` }), editable: false },
         makeCell({ type: 'code', content: 'prajas.hackathons()' }),
-        { ...makeCell({ type: 'md', content: `## Ask the Notebook\n\nClick the buttons below to learn more about me.` }), editable: false },
-        makeCell({ type: 'code', content: 'prajas.ask(question)' }),
+        { ...makeCell({ type: 'md', content: `## Hobbies & Free Time` }), editable: false },
+        makeCell({ type: 'code', content: 'prajas.hobbies()' }),
         { ...makeCell({ type: 'md', content: `## Contact` }), editable: false },
         makeCell({ type: 'code', content: 'prajas.contact()' }),
       ];
