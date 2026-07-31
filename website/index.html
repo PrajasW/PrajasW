@@ -967,6 +967,11 @@
       gap: 12px;
     }
 
+    .project-entry {
+      grid-template-columns: 90px 1fr;
+    }
+    .github-link:hover { opacity: 1 !important; color: var(--fn) !important; }
+
     .experience-entry .when {
       font-family: var(--mono);
       font-size: 13px;
@@ -2346,12 +2351,12 @@
       const list = document.createElement('div');
       list.className = 'experience-list';
       list.innerHTML = DATA.projects.map((p) => `
-    <div class="experience-entry">
-      <div class="when">${escapeHTML(p.shortName)}</div>
+    <div class="experience-entry project-entry">
+      <div class="when" style="font-family: monospace; font-size: 0.8rem; letter-spacing: 0.12em; opacity: 0.55; padding-top: 2px;">${escapeHTML(p.shortName)}</div>
       <div>
-        <div style="display:flex; align-items:center; gap:8px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
           <p class="role">${escapeHTML(p.title)}</p>
-          ${p.link ? `<a href="${p.link}" class="github-link" target="_blank" rel="noopener" style="display:flex;align-items:center;margin-top:2px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>` : ''}
+          ${p.link ? `<a href="${p.link}" class="github-link" target="_blank" rel="noopener" style="display:flex;align-items:center; color: var(--muted); opacity: 0.6; transition: opacity 0.2s; margin-top: 2px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>` : ''}
         </div>
         ${p.tech ? `<div class="tech-stack" style="margin:4px 0 6px;">${p.tech.split(',').map(t => `<span class="tech-badge">${escapeHTML(t.trim())}</span>`).join('')}</div>` : ''}
         ${!detailed ? `<p class="summary">${escapeHTML(p.summary)}</p>` : ''}
