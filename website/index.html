@@ -2055,7 +2055,9 @@
           authors: "P. Wadekar, V. S. P. Bachina, K. Bhosikar, A. Gangwal, C. Sharma",
           venue: "CVPR Workshop on SPAR-3D, 2026", award: "",
           summary: "Proposed a lightweight adversarial patch framework targeting the feature-matching stage of SfM pipelines. Demonstrated that injecting a minimal 12×12 pixel checkerboard patch increases reconstruction error (LPIPS) by 6.8× on the NeRF-Synthetic benchmark while remaining visually imperceptible.",
-          url: "", linkLabel: "Paper", tags: ["adversarial", "3d-reconstruction"], selected: true
+          arxiv: "https://arxiv.org/abs/2604.13153",
+          github: "https://github.com/PrajasW/patch-poison",
+          selected: true
         },
       ],
       experienceConcise: [
@@ -2217,20 +2219,26 @@
       return wrap;
     }
 
-    function renderPapers(selectedOnly) {
-      const rows = DATA.papers.filter(p => !selectedOnly || p.selected);
+    function renderPapers(detailed) {
+      const rows = DATA.papers.filter(p => p.selected);
       const wrap = document.createElement('div');
 
       const list = document.createElement('div');
       list.className = 'paper-list';
       list.innerHTML = rows.map((p) => `
     <div class="paper-item">
-      <div class="year">${p.year}</div>
+      <div class="when" style="font-family: var(--mono); font-size: 13px; color: var(--muted); padding-top: 1px;">${p.year}</div>
       <div>
-        <p class="title">${escapeHTML(p.title)}</p>
+        <div style="display:flex; justify-content:space-between; gap:16px;">
+          <p class="title">${escapeHTML(p.title)}</p>
+          <div style="display:flex; gap:12px; margin-top:2px;">
+            ${p.arxiv ? `<a href="${p.arxiv}" target="_blank" rel="noopener" style="color:var(--muted);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></a>` : ''}
+            ${p.github ? `<a href="${p.github}" target="_blank" rel="noopener" style="color:var(--muted);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>` : ''}
+          </div>
+        </div>
         <p class="authors">${escapeHTML(p.authors)}</p>
         <p class="venue">${escapeHTML(p.venue)}${p.award ? ` <span class="award">${escapeHTML(p.award)}</span>` : ''}</p>
-        ${p.summary ? `<p class="summary" style="margin-top:6px;font-size:13px;line-height:1.6;color:var(--ink)">${escapeHTML(p.summary)}</p>` : ''}
+        ${(detailed && p.summary) ? `<p class="summary" style="margin-top:6px;font-size:13.5px;line-height:1.6;color:var(--ink)">${escapeHTML(p.summary)}</p>` : ''}
       </div>
     </div>
   `).join('');
@@ -2494,8 +2502,8 @@
       if (/prajas\.contact\(\s*\)/.test(src)) { outEl.appendChild(renderContact()); return; }
       if (/prajas\.ask\(\s*question\s*\)/.test(src)) { outEl.appendChild(renderAskButtons()); return; }
 
-      const pm = src.match(/prajas\.publications\s*\(\s*(?:selected\s*=\s*(True|False))?\s*\)/);
-      if (pm) { outEl.appendChild(renderPapers(pm[1] !== 'False')); return; }
+      const pm = src.match(/prajas\.publications\s*\(\s*(?:detailed\s*=\s*(True|False))?\s*\)/);
+      if (pm) { outEl.appendChild(renderPapers(pm[1] === 'True')); return; }
 
       const em = src.match(/prajas\.experience\s*\(\s*(?:detailed\s*=\s*(True|False))?\s*\)/);
       if (em) { outEl.appendChild(renderExperience(em[1] === 'True')); return; }
@@ -2652,7 +2660,7 @@
         { ...makeCell({ type: 'md', content: `## Experience` }), editable: false },
         makeCell({ type: 'code', content: 'prajas.experience(detailed=False)' }),
         { ...makeCell({ type: 'md', content: `## Publications` }), editable: false },
-        makeCell({ type: 'code', content: 'prajas.publications()' }),
+        makeCell({ type: 'code', content: 'prajas.publications(detailed=False)' }),
         { ...makeCell({ type: 'md', content: `## Projects` }), editable: false },
         makeCell({ type: 'code', content: 'prajas.projects()' }),
         { ...makeCell({ type: 'md', content: `## Hackathons` }), editable: false },
@@ -3149,3 +3157,4 @@
 </body>
 
 </html>
+
