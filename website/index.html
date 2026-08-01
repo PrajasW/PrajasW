@@ -935,10 +935,12 @@
       opacity: 0.6;
       transition: opacity 0.2s, color 0.2s;
     }
+
     .github-link:hover {
       opacity: 1;
       color: var(--fn);
     }
+
     .github-link svg {
       width: 18px;
       height: 18px;
@@ -955,8 +957,8 @@
       font-family: var(--mono);
       font-size: 11px;
       color: var(--faint);
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.05);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       padding: 2px 6px;
       border-radius: 4px;
     }
@@ -970,7 +972,11 @@
     .project-entry {
       grid-template-columns: 90px 1fr;
     }
-    .github-link:hover { opacity: 1 !important; color: var(--fn) !important; }
+
+    .github-link:hover {
+      opacity: 1 !important;
+      color: var(--fn) !important;
+    }
 
     .experience-entry .when {
       font-family: var(--mono);
@@ -2194,19 +2200,40 @@
         }
       ],
       hackathons: [
-        {
-          event: "HackIIIT 2026",
-          award: "Best Hardware Project"
-        },
-        {
-          event: "Lloyds IP & I Hackathon on Agentic AI (2025)",
-          award: "Top 10 Finalist"
-        },
-        {
-          event: "Megathon 2025",
-          award: "Top 5 Finalist (Chubb Problem Statement)"
-        },
-      ],
+          {
+            shortName: "HackIIIT 2026",
+            title: "Best Hardware Project",
+            org: "OSDG, IIIT Hyderabad | Team: Santas And Their Elves",
+            when: "Jan 2026",
+            summary: "Project: Developed an MVP to solve unpredictable campus canteen wait times and availability.",
+            bullets: [
+              "Solution: Engineered a hardware-software integration featuring a physical ON/OFF switch synced with an app-based pre-ordering system to display real-time canteen status.",
+              "Impact: Streamlined the ordering process by ensuring orders are only accepted when canteens are operational, minimizing crowding, reducing wait times, and preventing wasted trips for students."
+            ]
+          },
+          {
+            shortName: "Lloyds 2025",
+            title: "Top 10 Finalist",
+            org: "Lloyds IP & I Hackathon on Agentic AI",
+            when: "2025",
+            link: "https://github.com/PrajasW",
+            summary: "Project: Developed an Agentic AI solution tailored for intelligent process automation and complex decision-making.",
+            bullets: [
+              "Focus: Leveraged autonomous AI agents to break down and execute multi-step workflows, showcasing innovation in the evolving landscape of intelligent banking and enterprise AI."
+            ]
+          },
+          {
+            shortName: "Megathon 2025",
+            title: "Top 5 Finalist",
+            org: "E-Cell IIIT Hyderabad & CHUBB",
+            when: "Oct 2025",
+            link: "https://github.com/PrajasW/ESPER-Insurance-Claim-Analysis-System",
+            summary: "Project: ESPER Insurance Claim Analysis System. Tackled the Chubb problem statement by building a robust system for analyzing and processing insurance claims.",
+            bullets: [
+              "Impact: Placed in the top 5 out of a massive pool of over 1,100 innovators and 62 colleges by pitching a high-viability prototype to an expert panel of industry leaders."
+            ]
+          }
+        ],
       askAnswers: {
         "what do you do offline?": "When I'm not coding, I enjoy exploring new music, watching sci-fi films, playing chess, and going on long walks around campus. I also like tinkering with hardware projects and 3D printing.",
         "what's in your tech stack?": "I primarily work with Python, C/C++, and JavaScript. For ML I use PyTorch and scikit-learn. For web development I use React, Node.js, and Express. I'm also comfortable with Docker, Linux systems programming, and PostgreSQL.",
@@ -2368,15 +2395,22 @@
       return wrap;
     }
 
-    function renderHackathons() {
+    function renderHackathons(detailed) {
       const wrap = document.createElement('div');
       const list = document.createElement('div');
       list.className = 'experience-list';
       list.innerHTML = DATA.hackathons.map((h) => `
     <div class="experience-entry">
-      <div class="when">${escapeHTML(h.event)}</div>
+      <div class="when">${escapeHTML(h.shortName)}</div>
       <div>
-        <p class="role">${escapeHTML(h.award)}</p>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <p class="role">${escapeHTML(h.title)}</p>
+          ${h.link ? `<a href="${h.link}" class="github-link" target="_blank" rel="noopener" style="display:flex;align-items:center;margin-top:2px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>` : ''}
+        </div>
+        <p class="org" style="margin-bottom:2px;">${escapeHTML(h.org)}</p>
+        <p class="advisor" style="margin-bottom:6px;">${escapeHTML(h.when)}</p>
+        ${!detailed && h.summary ? `<p class="summary">${escapeHTML(h.summary)}</p>` : ''}
+        ${detailed ? (h.summary ? `<p class="summary">${escapeHTML(h.summary)}</p>` : '') + (h.bullets ? `<ul class="bullets">${h.bullets.map(b => `<li>${escapeHTML(b)}</li>`).join('')}</ul>` : '') : ''}
       </div>
     </div>
   `).join('');
@@ -2582,7 +2616,8 @@
       if (/prajas\.about\(\s*\)/.test(src)) { outEl.appendChild(renderAbout()); return; }
       if (/prajas\.education\(\s*\)/.test(src)) { outEl.appendChild(renderEducation()); return; }
       if (/prajas\.hobbies\(\s*\)/.test(src)) { outEl.appendChild(renderHobbies()); return; }
-      if (/prajas\.hackathons\(\s*\)/.test(src)) { outEl.appendChild(renderHackathons()); return; }
+      const hm = src.match(/prajas\.hackathons\s*\(\s*(?:detailed\s*=\s*(True|False))?\s*\)/);
+        if (hm) { outEl.appendChild(renderHackathons(hm[1] === 'True')); return; }
       if (/prajas\.contact\(\s*\)/.test(src)) { outEl.appendChild(renderContact()); return; }
       if (/prajas\.ask\(\s*question\s*\)/.test(src)) { outEl.appendChild(renderAskButtons()); return; }
 
@@ -2751,7 +2786,7 @@
         { ...makeCell({ type: 'md', content: `## Projects` }), editable: false },
         makeCell({ type: 'code', content: 'prajas.projects(detailed=False)' }),
         { ...makeCell({ type: 'md', content: `## Hackathons` }), editable: false },
-        makeCell({ type: 'code', content: 'prajas.hackathons()' }),
+        makeCell({ type: 'code', content: 'prajas.hackathons(detailed=False)' }),
         { ...makeCell({ type: 'md', content: `## Hobbies & Free Time` }), editable: false },
         makeCell({ type: 'code', content: 'prajas.hobbies()' }),
         { ...makeCell({ type: 'md', content: `## Contact` }), editable: false },
@@ -3244,5 +3279,3 @@
 </body>
 
 </html>
-
-
