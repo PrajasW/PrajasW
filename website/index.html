@@ -2241,13 +2241,19 @@
         "how was your research study on Event Segmentation Theory?": "It was a fascinating deep dive into how humans perceive boundaries between events in continuous experience. The study explored computational models that attempt to replicate this cognitive process, and it gave me a deeper appreciation for how perception and memory interact at a fundamental level."
       },
       hobbies: [
-        "Exploring new music",
-        "Watching sci-fi films",
-        "Playing chess",
-        "Going on long walks around campus",
-        "Tinkering with hardware projects",
-        "3D printing"
-      ],
+          {
+            title: "Electric Guitar",
+            description: "Playing the electric guitar just well enough to entertain myself (and hopefully not annoy my neighbors)."
+          },
+          {
+            title: "Anime",
+            description: "Watching (and probably talking) way too much about anime."
+          },
+          {
+            title: "Poker",
+            description: "Playing competitive poker for the love of the strategy and statistics."
+          }
+        ],
       education: [
         {
           degree: "B.Tech & M.Sc. in Computer Science",
@@ -2303,8 +2309,10 @@
 
     function renderHobbies() {
       const wrap = document.createElement('div');
-      wrap.className = 'out-text';
-      wrap.innerHTML = '<ul style="margin: 0; padding-left: 20px;">' + DATA.hobbies.map(h => '<li style="margin-bottom: 4px;">' + escapeHTML(h) + '</li>').join('') + '</ul>';
+      wrap.innerHTML = `<ul class="bullets" style="margin: 0; padding-left: 20px; list-style-position: outside; color: var(--ink);">` + 
+        DATA.hobbies.map(h => `<li style="margin-bottom: 12px; font-family: var(--sans); font-size: 14px; line-height: 1.6;">
+          <strong style="color: var(--fn); font-weight: 600;">${escapeHTML(h.title)}:</strong> <span style="color: var(--muted);">${escapeHTML(h.description)}</span>
+        </li>`).join('') + `</ul>`;
       return wrap;
     }
 
